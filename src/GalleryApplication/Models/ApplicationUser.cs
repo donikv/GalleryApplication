@@ -9,5 +9,8 @@ namespace GalleryApplication.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public Guid _Id { get; set; }
+        public List<Album> _Albums { get; set; }
+        public List<ApplicationUser> _Friends { get; set; }
     }
 }
