@@ -11,6 +11,9 @@ namespace ApplicationClasses
     public class GalleryDbContext : DbContext
     {
         public IDbSet<User> Users { get; set; }
+        public IDbSet<Album> Albums { get; set; }
+        public IDbSet<Picture> Pictures { get; set; }
+
         public GalleryDbContext(string connectionString) : base(connectionString)
         {
 

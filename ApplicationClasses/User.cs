@@ -19,6 +19,7 @@ namespace ApplicationClasses
             this.Id = Id;
             Albums=new List<Album>();
             Friends=new List<User>();
+            Console.WriteLine("Stovrio novog usera: "+ Id.ToString());
         }
 
     }

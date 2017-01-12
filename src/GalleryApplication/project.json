@@ -1,7 +1,8 @@
-﻿{
+{
   "userSecretsId": "aspnet-GalleryApplication-583069b0-2811-4ac1-bbb1-f4d2564e066c",
 
   "dependencies": {
+    "EntityFramework": "6.1.3",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
@@ -58,7 +59,13 @@
   },
 
   "frameworks": {
-    "net452": { }
+    "net452": {
+      "dependencies": {
+        "ApplicationClasses": {
+          "target": "project"
+        }
+      }
+    }
   },
 
   "buildOptions": {
