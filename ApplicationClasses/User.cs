@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace GalleryApplication.Models
-{
+namespace ApplicationClasses
+{ 
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class User
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
         public List<Album> Albums { get; set; }
-        public List<ApplicationUser> Friends { get; set; }
+        public List<User> Friends { get; set; }
 
-/*        public ApplicationUser(Guid Id, String Name)
+          public User(Guid Id, string Name)
         {
             this.Name = Name;
             this.Id = Id;
             Albums=new List<Album>();
-            Friends=new List<ApplicationUser>();
-        }*/
+            Friends=new List<User>();
+        }
 
     }
 }

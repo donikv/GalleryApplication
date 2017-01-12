@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace GalleryApplication.Models
 {
-    public class Album
+    public class Comment
     {
         public Guid Id { get; set; }
-        public string AlbumName { get; set; }
-        public List<Picture> Pictures { get; set; }
+        public string CommentText { get; set; }
+
     }
 }
