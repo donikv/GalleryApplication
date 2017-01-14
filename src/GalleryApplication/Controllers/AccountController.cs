@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ApplicationClasses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace GalleryApplication.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly List<User> _users;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -28,8 +30,10 @@ namespace GalleryApplication.Controllers
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            List<User> users)
         {
+            _users = users;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -105,7 +109,7 @@ namespace GalleryApplication.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Name, Email = model.Email};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -117,6 +121,8 @@ namespace GalleryApplication.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
+                    /*ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);*/
+                    _users.Add(new User(Guid.Parse(user.Id), model.Name));
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
