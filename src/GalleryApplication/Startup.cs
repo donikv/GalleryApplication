@@ -53,6 +53,14 @@ namespace GalleryApplication
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddIdentity<ApplicationUser, IdentityRole>(x =>
+            {
+                x.Password.RequireDigit = false;
+                x.Password.RequireLowercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireUppercase = false;
+            });
+
             services.AddMvc();
 
             // Add application services.
