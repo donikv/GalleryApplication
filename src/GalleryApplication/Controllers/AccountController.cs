@@ -125,6 +125,7 @@ namespace GalleryApplication.Controllers
                     /*ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);*/
                     var id = Guid.Parse(user.Id);
                     var tomId = Guid.Parse("00000000-0000-0000-0000-000000000000");
+                    _context.Users.Add(new User(tomId, "Tom"));
                     _context.Users.Add(new User(id, model.Name));
                     _context.SaveChanges();
                     _context.Users.First(s => s.Id.Equals(id)).SubscribedTo.Add(_context.Users.First(s=>s.Id.Equals(tomId)));
