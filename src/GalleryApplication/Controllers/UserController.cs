@@ -43,7 +43,7 @@ namespace GalleryApplication.Controllers
         public IActionResult ShowFriends(Guid Id)
         {
             var user = _context.Users.FirstOrDefault(s => s.Id.Equals(Id));
-            var friends = user.Friends.ToList();
+            var friends = user.SubscribedTo.ToList();
             return View(friends);
         }
     }

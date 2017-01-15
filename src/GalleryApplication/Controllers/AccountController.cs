@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ApplicationClasses;
+using ApplicationClasses.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -126,7 +127,7 @@ namespace GalleryApplication.Controllers
                     var tomId = Guid.Parse("00000000-0000-0000-0000-000000000000");
                     _context.Users.Add(new User(id, model.Name));
                     _context.SaveChanges();
-                    _context.Users.First(s => s.Id.Equals(id)).Friends.Add(_context.Users.First(s=>s.Id.Equals(tomId)));
+                    _context.Users.First(s => s.Id.Equals(id)).SubscribedTo.Add(_context.Users.First(s=>s.Id.Equals(tomId)));
                     _context.SaveChanges();
                     GalleryDbContext context = _context;
                     return RedirectToLocal(returnUrl);
