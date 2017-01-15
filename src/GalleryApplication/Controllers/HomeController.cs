@@ -33,10 +33,10 @@ namespace GalleryApplication.Controllers
 
         [Authorize]
         [HttpGet("{Id}")]
-        public IActionResult AccountDetails(Guid Id)
+        public IActionResult ShowAlbum(Guid Id)
         {
-            var currentUser = _context.Users.FirstOrDefault(s => s.Id.Equals(Id));
-            return View(currentUser);
+            var album = _context.Albums.FirstOrDefault(s => s.Id.Equals(Id));
+            return View();
         }
 
         public IActionResult About()

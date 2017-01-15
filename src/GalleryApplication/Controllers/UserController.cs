@@ -22,6 +22,7 @@ namespace GalleryApplication.Controllers
             _context = context;
         }
         [Authorize]
+
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentApplicationUserUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -29,9 +30,21 @@ namespace GalleryApplication.Controllers
             var currentUser = _context.Users.FirstOrDefault(s => s.Id.Equals(currentId));
             return View(currentUser);
         }
-        public IActionResult AccountDetails()
+
+        [Authorize]
+        [HttpGet("User/AccountDetails/{Id}")]
+        public IActionResult AccountDetails(Guid Id)
         {
-            return View();
+            var currentUser = _context.Users.FirstOrDefault(s => s.Id.Equals(Id));
+            return View(currentUser);
+        }
+        [Authorize]
+        [HttpGet("User/ShowFriends/{Id}")]
+        public IActionResult ShowFriends(Guid Id)
+        {
+            var user = _context.Users.FirstOrDefault(s => s.Id.Equals(Id));
+            var friends = user.Friends.ToList();
+            return View(friends);
         }
     }
 }

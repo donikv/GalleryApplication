@@ -34,16 +34,19 @@ else
 
 <div>
     <a asp-controller="User" asp-action="AccountDetails" asp-route-id="@Model.Id">Account details</a>
-    <a asp-controller="User" asp-action="ShowFirends" asp-route-id="@Model.Id">View friends</a>
     <br/>
-        @if (Model != null)
+        @if (Model.Albums != null)
         {
             foreach (var album in Model.Albums)
             {
                 <h2>
-                    @album.AlbumName <br /> <a asp-controller="Home" asp-action="ShowAlbum" asp-route-id="@album.Id">ShowAlbum</a>
+                    @album.AlbumName <br/> <a asp-controller="Home" asp-action="ShowAlbum" asp-route-id="@album.Id">ShowAlbum</a>
                 </h2>
             }
+        }
+        else
+        {
+            <a>Ovdje ce ic albumi</a>
         }
 
 

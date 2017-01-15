@@ -1,0 +1,17 @@
+﻿@using ApplicationClasses
+@model ApplicationClasses.Album
+
+@{
+    ViewData["Title"] = "Album: " + Model.AlbumName;
+}
+
+<h2>AccountDetails</h2>
+
+<div>
+    <h1>Name: @Model.AlbumName</h1>
+
+    @foreach (var picture in Model.Pictures)
+    {
+
+    }
+</div>
