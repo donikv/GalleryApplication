@@ -66,9 +66,9 @@ namespace GalleryApplication
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddTransient<List<User>>();
+/*            services.AddIdentity<>()<List<User>>();
             services.AddTransient<List<Album>>();
-            services.AddTransient<List<Picture>>();
+            services.AddTransient<List<Picture>>();*/
             services.AddScoped<GalleryDbContext>(s =>
             {
                 return new GalleryDbContext(Configuration["ConnectionStrings:DefaultConnection"]);

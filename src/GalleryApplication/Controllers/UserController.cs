@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Configuration;
 using System.Threading.Tasks;
 using ApplicationClasses;
 using GalleryApplication.Models;
@@ -11,16 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GalleryApplication.Controllers
 {
-    public class HomeController : Controller
+    public class UserController : Controller
     {
         private readonly GalleryDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(GalleryDbContext context,
+        public UserController(GalleryDbContext context,
         UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _context=context;
+            _context = context;
         }
         [Authorize]
         public async Task<IActionResult> Index()
@@ -30,30 +29,7 @@ namespace GalleryApplication.Controllers
             var currentUser = _context.Users.FirstOrDefault(s => s.Id.Equals(currentId));
             return View(currentUser);
         }
-
-        [Authorize]
-        [HttpGet("{Id}")]
-        public IActionResult AccountDetails(Guid Id)
-        {
-            var currentUser = _context.Users.FirstOrDefault(s => s.Id.Equals(Id));
-            return View(currentUser);
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
+        public IActionResult AccountDetails()
         {
             return View();
         }

@@ -22,5 +22,9 @@ namespace ApplicationClasses
             Console.WriteLine("Stovrio novog usera: "+ Id.ToString());
         }
 
+        public User()
+        {
+        }
+
     }
 }

@@ -24,7 +24,7 @@ namespace ApplicationClasses
             builder.Entity<User>().HasKey(s => s.Id);
             builder.Entity<User>().Property(s => s.Name).IsRequired();
             builder.Entity<User>().HasMany(s => s.Albums);
-            builder.Entity<User>().HasMany(s => s.Friends).WithMany(s=>s.Friends);
+            builder.Entity<User>().HasMany(s => s.Friends);
             builder.Entity<Album>().HasMany(s => s.Pictures);
             builder.Entity<Album>().HasKey(s => s.Id);
             builder.Entity<Album>().Property(s => s.AlbumName).IsRequired();

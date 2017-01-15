@@ -18,7 +18,7 @@ namespace GalleryApplication.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly List<User> _users;
+        private readonly GalleryDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -28,12 +28,12 @@ namespace GalleryApplication.Controllers
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            GalleryDbContext context,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory,
-            List<User> users)
+            ILoggerFactory loggerFactory)
         {
-            _users = users;
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -122,7 +122,8 @@ namespace GalleryApplication.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
                     /*ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);*/
-                    _users.Add(new User(Guid.Parse(user.Id), model.Name));
+                    _context.Users.Add(new User(Guid.Parse(user.Id), model.Name));
+                    _context.SaveChanges();
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

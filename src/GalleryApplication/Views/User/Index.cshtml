@@ -24,7 +24,7 @@
 <body>
 @if (Model != null)
 {
-    <h1><a asp-controller="User" asp-action="Index" asp-route-id="@Model.Id">Account details</a>Hello @Model.Name</h1>
+    <h1>Hello @Model.Name</h1>
     <br/>
 }
 else
@@ -33,18 +33,18 @@ else
 }
 
 <div>
-
+    <a asp-controller="User" asp-action="AccountDetails" asp-route-id="@Model.Id">Account details</a>
+    <a asp-controller="User" asp-action="ShowFirends" asp-route-id="@Model.Id">View friends</a>
     <br/>
-    @*        <a asp-controller="Home" asp-action="SeeCompleted"> See completed Todos</a>
         @if (Model != null)
         {
-            foreach (var todo in Model)
+            foreach (var album in Model.Albums)
             {
                 <h2>
-                    @todo.Text <br /> @todo.DateCreated <br /> <a asp-controller="Todo" asp-action="MarkCompleted" asp-route-id="@todo.Id">Mark completed</a>
+                    @album.AlbumName <br /> <a asp-controller="Home" asp-action="ShowAlbum" asp-route-id="@album.Id">ShowAlbum</a>
                 </h2>
             }
-        }*@
+        }
 
 
 </div>
