@@ -6,7 +6,7 @@ using ApplicationClasses.Models;
 
 namespace ApplicationClasses.Repositories
 {
-    class UserSqlRepository : DefaultSqlRepository<User>, IUserRepository
+    public class UserSqlRepository : DefaultSqlRepository<User>, IUserRepository
     {
         public UserSqlRepository(GalleryDbContext context) : base(context, context.Users)
         {

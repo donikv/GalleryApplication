@@ -4,7 +4,7 @@ using ApplicationClasses.Models;
 
 namespace ApplicationClasses.Interfaces
 {
-    interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
 
         //Ovo vraca usere na koje je taj user pretplacen

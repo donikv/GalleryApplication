@@ -8,7 +8,7 @@ using ApplicationClasses.Models;
 
 namespace ApplicationClasses.Repositories
 {
-    class CommentSqlRepository:DefaultSqlRepository<Comment>,ICommentRepository
+    public class CommentSqlRepository:DefaultSqlRepository<Comment>,ICommentRepository
     {
         public CommentSqlRepository(GalleryDbContext context) : base(context, context.Comments)
         {

@@ -15,16 +15,43 @@ namespace ApplicationClasses.Models
         //Ovo je lista njegovih pretplatnika
         public List<User> OwnSubscribers { get; set; }
 
+        public User(Guid id, string name, List<Album> albums, List<User> subscribedTo, List<User> ownSubscribers)
+        {
+            Name = name;
+            Id = id;
+            Albums= albums;
+            SubscribedTo= subscribedTo;
+            OwnSubscribers= ownSubscribers;
+            Console.WriteLine("Stovrio novog usera: "+ Id.ToString());
+        }
+        public User(Guid id, string name, List<Album> albums)
+        {
+            Name = name;
+            Id = id;
+            Albums = albums;
+            SubscribedTo = new List<User>();
+            OwnSubscribers = new List<User>();
+            Console.WriteLine("Stovrio novog usera: " + Id.ToString());
+        }
+        public User(Guid id, string name, List<User> subscribedTo, List<User> ownSubscribers)
+        {
+            Name = name;
+            Id = id;
+            Albums = new List<Album>();
+            SubscribedTo = subscribedTo;
+            OwnSubscribers = ownSubscribers;
+            Console.WriteLine("Stovrio novog usera: " + Id.ToString());
+        }
+
         public User(Guid id, string name)
         {
             Name = name;
             Id = id;
-            Albums=new List<Album>();
-            SubscribedTo=new List<User>();
-            OwnSubscribers=new List<User>();
-            Console.WriteLine("Stovrio novog usera: "+ Id.ToString());
+            Albums = new List<Album>();
+            SubscribedTo = new List<User>();
+            OwnSubscribers = new List<User>();
+            Console.WriteLine("Stovrio novog usera: " + Id.ToString());
         }
-
         public User()
         {
         }

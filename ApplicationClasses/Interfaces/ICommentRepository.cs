@@ -8,7 +8,7 @@ using ApplicationClasses.Models;
 
 namespace ApplicationClasses.Interfaces
 {
-    interface ICommentRepository : IRepository<Comment>
+    public interface ICommentRepository : IRepository<Comment>
     {
         List<Comment> GetCommentsForPicture(Picture picture);
         List<Comment> GetCommentsForPicture(Guid pictureId);

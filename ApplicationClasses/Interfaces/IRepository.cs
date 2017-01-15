@@ -11,7 +11,7 @@ namespace ApplicationClasses.Interfaces
     /// i zasto postoje.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    interface IRepository<T> where T : Model
+    public interface IRepository<T> where T : Model
     {
         T Get(Guid id);
         void Add(T item);
