@@ -69,7 +69,7 @@ namespace GalleryApplication
 /*            services.AddIdentity<>()<List<User>>();
             services.AddTransient<List<Album>>();
             services.AddTransient<List<Picture>>();*/
-            services.AddScoped<GalleryDbContext>(s =>
+            services.AddSingleton<GalleryDbContext>(s =>
             {
                 return new GalleryDbContext(Configuration["ConnectionStrings:DefaultConnection"]);
             });

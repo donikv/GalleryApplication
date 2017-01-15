@@ -109,7 +109,7 @@ namespace GalleryApplication.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Name, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -122,8 +122,13 @@ namespace GalleryApplication.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
                     /*ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);*/
-                    _context.Users.Add(new User(Guid.Parse(user.Id), model.Name));
+                    var id = Guid.Parse(user.Id);
+                    var tomId = Guid.Parse("00000000-0000-0000-0000-000000000000");
+                    _context.Users.Add(new User(id, model.Name));
                     _context.SaveChanges();
+                    _context.Users.First(s => s.Id.Equals(id)).Friends.Add(_context.Users.First(s=>s.Id.Equals(tomId)));
+                    _context.SaveChanges();
+                    GalleryDbContext context = _context;
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

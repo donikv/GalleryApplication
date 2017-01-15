@@ -7,5 +7,10 @@ namespace ApplicationClasses.Models
         public User Owner { get; set; }
         public string AlbumName { get; set; }
         public List<Picture> Pictures { get; set; }
+
+        public Album()
+        {
+            
+        }
     }
 }
