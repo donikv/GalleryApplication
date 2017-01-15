@@ -49,14 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs" />
-    <Compile Include="IUserRepository.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="Comment.cs" />
+    <Compile Include="Interfaces\ICommentRepository.cs" />
+    <Compile Include="Models\Album.cs" />
+    <Compile Include="Repositories\AlbumSqlRepository.cs" />
+    <Compile Include="Repositories\CommentSqlRepository.cs" />
+    <Compile Include="Repositories\DefaultSqlRepository.cs" />
+    <Compile Include="Interfaces\IAlbumRepository.cs" />
+    <Compile Include="Interfaces\IPictureRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
+    <Compile Include="Repositories\PictureSqlRepository.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="GalleryDbContext.cs" />
-    <Compile Include="Picture.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserSqlRepository.cs" />
+    <Compile Include="Repositories\UserSqlRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
