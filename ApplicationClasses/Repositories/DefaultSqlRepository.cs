@@ -12,7 +12,7 @@ namespace ApplicationClasses.Repositories
     /// modeli pocnu drasticno razlikovati, mozemo overrideati i slicno.
     /// </summary>
     /// <typeparam name="T">Model koji se nalazi u repozitoriju</typeparam>
-    abstract class DefaultSqlRepository<T> : IRepository<T> where T : Model
+    public abstract class DefaultSqlRepository<T> : IRepository<T> where T : Model
     {
         protected readonly GalleryDbContext _context;
         protected readonly IDbSet<T> _subContext;

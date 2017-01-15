@@ -6,7 +6,7 @@ using ApplicationClasses.Models;
 
 namespace ApplicationClasses.Repositories
 {
-    class PictureSqlRepository : DefaultSqlRepository<Picture>,IPictureRepository
+    public class PictureSqlRepository : DefaultSqlRepository<Picture>,IPictureRepository
     {
 
         public PictureSqlRepository(GalleryDbContext context):base(context,context.Pictures)

@@ -6,7 +6,7 @@ using ApplicationClasses.Models;
 
 namespace ApplicationClasses.Repositories
 {
-    class AlbumSqlRepository : DefaultSqlRepository<Album>, IAlbumRepository
+    public class AlbumSqlRepository : DefaultSqlRepository<Album>, IAlbumRepository
     {
         public AlbumSqlRepository(GalleryDbContext context) : base(context, context.Albums)
         {

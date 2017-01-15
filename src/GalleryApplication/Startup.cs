@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationClasses;
+using ApplicationClasses.Interfaces;
+using ApplicationClasses.Models;
+using ApplicationClasses.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -66,10 +69,11 @@ namespace GalleryApplication
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-/*            services.AddIdentity<>()<List<User>>();
-            services.AddTransient<List<Album>>();
-            services.AddTransient<List<Picture>>();*/
-            services.AddSingleton<GalleryDbContext>(s =>
+            services.AddTransient<IUserRepository, UserSqlRepository>();
+            services.AddTransient<IAlbumRepository, AlbumSqlRepository>();
+            services.AddTransient<IPictureRepository, PictureSqlRepository>();
+            services.AddTransient<ICommentRepository, CommentSqlRepository>();
+            services.AddScoped<GalleryDbContext>(s =>
             {
                 return new GalleryDbContext(Configuration["ConnectionStrings:DefaultConnection"]);
             });

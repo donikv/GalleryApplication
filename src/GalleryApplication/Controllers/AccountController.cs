@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ApplicationClasses;
+using ApplicationClasses.Interfaces;
 using ApplicationClasses.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +20,7 @@ namespace GalleryApplication.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly GalleryDbContext _context;
+        private readonly IUserRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -29,12 +30,12 @@ namespace GalleryApplication.Controllers
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            GalleryDbContext context,
+            IUserRepository repository,
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory)
         {
-            _context = context;
+            _repository=repository;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -125,12 +126,17 @@ namespace GalleryApplication.Controllers
                     /*ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);*/
                     var id = Guid.Parse(user.Id);
                     var tomId = Guid.Parse("00000000-0000-0000-0000-000000000000");
-                    _context.Users.Add(new User(tomId, "Tom"));
-                    _context.Users.Add(new User(id, model.Name));
-                    _context.SaveChanges();
-                    _context.Users.First(s => s.Id.Equals(id)).SubscribedTo.Add(_context.Users.First(s=>s.Id.Equals(tomId)));
-                    _context.SaveChanges();
-                    GalleryDbContext context = _context;
+                    User tom = new User(tomId, "Tom");
+                    try
+                    {
+                        _repository.Add(tom);
+                    }
+                    catch (Exception ignorable)
+                    {
+                    }
+                    User newUser = new User(id, model.Name);
+                    newUser.SubscribedTo.Add(tom);
+                    _repository.Add(newUser);
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
