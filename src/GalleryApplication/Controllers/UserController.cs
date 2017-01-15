@@ -8,8 +8,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace GalleryApplication.Controllers
 {
+    /*
+     * Mozemo li predati usera (ovog naseg) u konstruktor za ovaj controller.
+     *Jer ovako ga trazimo trazimo po svim userima na osnovu id-a koji dobivamo na ovaj njihov nacin, a to se sigurno tak ne radi.
+     * Isti sistem bi trebali imati na svim kontrolerima, ak znamo.
+     */
     public class UserController : Controller
     {
         private readonly GalleryDbContext _context;

@@ -1,0 +1,37 @@
+﻿@model ApplicationClasses.Models.User
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+@if (Model != null)
+{
+    <h1>@Model.Name'S Subscriptions</h1>
+    <br />
+}
+else
+{
+    <h1>Evo ga</h1>
+}
+
+<div>
+    <a asp-controller="User" asp-action="AccountDetails" asp-route-id="@Model.Id">Account details</a>
+    <br />
+    @if (Model.SubscribedTo != null)
+    {
+        foreach (var subscriber in Model.SubscribedTo)
+        {
+            <h2>
+                @subscriber.Name 
+            </h2>
+        }
+    }
+    else
+    {
+        <a>Nema pretplatnika</a>
+    }
+
+
+</div>
