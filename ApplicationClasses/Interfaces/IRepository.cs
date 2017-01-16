@@ -15,7 +15,9 @@ namespace ApplicationClasses.Interfaces
     {
         T Get(Guid id);
         void Add(T item);
+        void Update(T item);
         bool Remove(Guid id, Guid userId);
+        bool Remove(Guid id);
         List<T> GetFiltered(Func<T, bool> filterFunction);
     }
 }

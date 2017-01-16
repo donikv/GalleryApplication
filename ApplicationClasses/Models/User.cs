@@ -10,12 +10,12 @@ namespace ApplicationClasses.Models
         public List<Album> Albums { get; set; }
 
         //Ovo je lista onih na koje je pretplacen
-        public List<User> SubscribedTo { get; set; }
+        public List<Guid> SubscribedTo { get; set; }
 
         //Ovo je lista njegovih pretplatnika
-        public List<User> OwnSubscribers { get; set; }
+        public List<Guid> OwnSubscribers { get; set; }
 
-        public User(Guid id, string name, List<Album> albums, List<User> subscribedTo, List<User> ownSubscribers)
+        public User(Guid id, string name, List<Album> albums, List<Guid> subscribedTo, List<Guid> ownSubscribers)
         {
             Name = name;
             Id = id;
@@ -29,11 +29,11 @@ namespace ApplicationClasses.Models
             Name = name;
             Id = id;
             Albums = albums;
-            SubscribedTo = new List<User>();
-            OwnSubscribers = new List<User>();
+            SubscribedTo = new List<Guid>();
+            OwnSubscribers = new List<Guid>();
             Console.WriteLine("Stovrio novog usera: " + Id.ToString());
         }
-        public User(Guid id, string name, List<User> subscribedTo, List<User> ownSubscribers)
+        public User(Guid id, string name, List<Guid> subscribedTo, List<Guid> ownSubscribers)
         {
             Name = name;
             Id = id;
@@ -48,8 +48,8 @@ namespace ApplicationClasses.Models
             Name = name;
             Id = id;
             Albums = new List<Album>();
-            SubscribedTo = new List<User>();
-            OwnSubscribers = new List<User>();
+            SubscribedTo = new List<Guid>();
+            OwnSubscribers = new List<Guid>();
             Console.WriteLine("Stovrio novog usera: " + Id.ToString());
         }
         public User()

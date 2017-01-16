@@ -57,7 +57,12 @@ namespace GalleryApplication.Controllers
             ApplicationUser currentApplicationUserUser = await _userManager.GetUserAsync(HttpContext.User);
             var currentId = Guid.Parse(currentApplicationUserUser.Id);
             var friends = _repository.GetSubscribed(currentId);
-            return View(friends);
+            List<User> friendList = new List<User>();
+            foreach (var friend in friends)
+            {
+                friendList.Add(_repository.Get(friend));
+            }
+            return View(friendList);
         }
     }
 }

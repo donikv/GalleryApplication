@@ -12,24 +12,30 @@ namespace ApplicationClasses.Repositories
         {
         }
 
-        public List<User> GetSubscriptions(Guid userId)
+        public List<Guid> GetSubscriptions(Guid userId)
         {
             var user = _subContext.FirstOrDefault(x => x.Id.Equals(userId));
             return GetSubscriptions(user);
         }
 
-        public List<User> GetSubscriptions(User user)
+        public List<Guid> GetSubscriptions(User user)
         {
             return user.SubscribedTo;
         }
 
-        public List<User> GetSubscribed(Guid userId)
+        public void AddSubscriber(Guid id, User user)
+        {
+            GetSubscriptions(user).Add(id);
+            Update(user);
+        }
+
+        public List<Guid> GetSubscribed(Guid userId)
         {
             var user = _subContext.FirstOrDefault(x => x.Id.Equals(userId));
             return GetSubscribed(user);
         }
 
-        public List<User> GetSubscribed(User user)
+        public List<Guid> GetSubscribed(User user)
         {
             return user.OwnSubscribers;
         }

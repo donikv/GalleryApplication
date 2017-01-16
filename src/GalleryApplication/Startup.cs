@@ -78,7 +78,7 @@ namespace GalleryApplication
             services.AddTransient<IAlbumRepository, AlbumSqlRepository>();
             services.AddTransient<IPictureRepository, PictureSqlRepository>();
             services.AddTransient<ICommentRepository, CommentSqlRepository>();
-            services.AddScoped<GalleryDbContext>(s =>
+            services.AddSingleton<GalleryDbContext>(s =>
             {
                 return new GalleryDbContext(Configuration["ConnectionStrings:DefaultConnection"]);
             });

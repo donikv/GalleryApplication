@@ -40,6 +40,12 @@ namespace ApplicationClasses.Repositories
             UpdateDatabase();
         }
 
+        public void Update(T item)
+        {
+            Remove(item.Id);
+            Add(item);
+        }
+
         public T Get(Guid id)
         {
             var item = _subContext.FirstOrDefault(x => x.Id == id);
@@ -56,6 +62,15 @@ namespace ApplicationClasses.Repositories
         {
             var album = Get(id);
             if (album == null || !album.Id.Equals(userId))
+                return false;
+            _subContext.Remove(album);
+            UpdateDatabase();
+            return true;
+        }
+        public bool Remove(Guid id)
+        {
+            var album = Get(id);
+            if (album == null)
                 return false;
             _subContext.Remove(album);
             UpdateDatabase();

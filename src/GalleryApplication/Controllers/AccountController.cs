@@ -35,7 +35,7 @@ namespace GalleryApplication.Controllers
             ISmsSender smsSender,
             ILoggerFactory loggerFactory)
         {
-            _repository=repository;
+            _repository = repository;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -136,7 +136,7 @@ namespace GalleryApplication.Controllers
                     }
                     User newUser = new User(id, model.Name);
                     _repository.Add(newUser);
-                    _repository.GetSubscriptions(newUser).Add(_repository.Get(tomId));
+                    _repository.AddSubscriber(id, newUser);
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

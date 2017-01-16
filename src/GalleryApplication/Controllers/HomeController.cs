@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel.Configuration;
 using System.Threading.Tasks;
 using ApplicationClasses;
+using ApplicationClasses.Interfaces;
 using GalleryApplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,29 +14,32 @@ namespace GalleryApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly GalleryDbContext _context;
+        private readonly IUserRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(GalleryDbContext context,
+        public HomeController(IUserRepository repository,
         UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _context=context;
+            _repository = repository;
         }
         [Authorize]
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentApplicationUserUser = await _userManager.GetUserAsync(HttpContext.User);
             var currentId = Guid.Parse(currentApplicationUserUser.Id);
-            var currentUser = _context.Users.FirstOrDefault(s => s.Id.Equals(currentId));
+            var currentUser = _repository.Get(currentId);
             return View(currentUser);
         }
 
         [Authorize]
         [HttpGet("{Id}")]
-        public IActionResult ShowAlbum(Guid Id)
+        public async Task<IActionResult> ShowAlbum(Guid Id)
         {
-            var album = _context.Albums.FirstOrDefault(s => s.Id.Equals(Id));
+            ApplicationUser currentApplicationUserUser = await _userManager.GetUserAsync(HttpContext.User);
+            var currentId = Guid.Parse(currentApplicationUserUser.Id);
+            var currentUser = _repository.Get(currentId);
+            var album = currentUser.Albums;
             return View();
         }
 
