@@ -135,8 +135,8 @@ namespace GalleryApplication.Controllers
                     {
                     }
                     User newUser = new User(id, model.Name);
-                    newUser.SubscribedTo.Add(tom);
                     _repository.Add(newUser);
+                    _repository.GetSubscriptions(newUser).Add(_repository.Get(tomId));
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
