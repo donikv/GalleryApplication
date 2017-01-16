@@ -1,11 +1,24 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url("/images/tenk.jpg");
+    background-size: cover;
+    background-color: transparent;
+        color: white;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: white;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
+    color: white;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -46,5 +59,13 @@ textarea {
   /* Hide captions */
   .carousel-caption {
     display: none
+  }
+
+  .home-page {
+      background-image:url("/images/tenk.jpg");
+  }
+
+  .greeting {
+      
   }
 }
