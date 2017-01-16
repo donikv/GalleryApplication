@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using GalleryApplication.Data;
 using GalleryApplication.Models;
 using GalleryApplication.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GalleryApplication
 {
@@ -64,7 +65,11 @@ namespace GalleryApplication
                 x.Password.RequireUppercase = false;
             });
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.SslPort = 44353;
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
